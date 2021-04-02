@@ -14,7 +14,7 @@ class RequestLoggerListenerTest extends KernelTestCase
     /**
      * @dataProvider microserviceProvider
      */
-    public function testOnHttpRequestIsCalledWhenEventIsTriggered(Microservice $microservice, string $microserviceName, string $method, string $uri, array $options)
+    public function testRequestIsLoggedViaAnEvent(Microservice $microservice, string $microserviceName, string $method, string $uri, array $options)
     {
         $event = new RequestEvent($microservice, $method, $uri, $options);
         $logger = $this->createMock(LoggerInterface::class);
