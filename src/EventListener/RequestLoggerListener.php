@@ -6,7 +6,11 @@ use Mtarld\ApiPlatformMsBundle\Event\RequestEvent;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+// Help opcache.preload discover always-needed symbols
+class_exists(RequestEvent::class);
 /**
+ * @final
+ *
  * @author Smaïne Milianni <smaine.milianni@gmail.com>
  */
 class RequestLoggerListener implements EventSubscriberInterface
