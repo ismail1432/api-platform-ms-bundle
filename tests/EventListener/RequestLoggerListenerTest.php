@@ -12,19 +12,18 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 class RequestLoggerListenerTest extends KernelTestCase
 {
     /**
-     * @dataProvider microserviceProvider
+     * @dataProvider microserviceDataProvider
      */
-    public function testRequestIsLoggedViaAnEvent(Microservice $microservice, string $microserviceName, string $method, string $uri, array $options)
+    public function testRequestIsLoggedViaAnEvent(Microservice $microservice, string $microserviceName, string $method, string $uri)
     {
-        $event = new RequestEvent($microservice, $method, $uri, $options);
+        $event = new RequestEvent($microservice, $method, $uri, []);
         $logger = $this->createMock(LoggerInterface::class);
         $logger->expects(self::once())
             ->method('debug')
-            ->with('[GenericHttpClient] for Microservice "{microservice_name}" calling {method} {url}', [
+            ->with('Microservice "{microservice_name}" calling {method} {url}', [
                 'method' => $method,
                 'microservice_name' => $microserviceName,
                 'url' => $uri,
-                'options' => $options,
             ])
         ;
 
@@ -33,9 +32,9 @@ class RequestLoggerListenerTest extends KernelTestCase
         $dispatcher->dispatch($event);
     }
 
-    public function microserviceProvider(): iterable
+    public function microserviceDataProvider(): iterable
     {
-        yield [new Microservice($msName = 'product', 'https://localhost', '/api', 'jsonld'),  $msName, 'GET', '/products', []];
-        yield [new Microservice($msName = 'user', 'https://domain.com', '/app', 'json'), $msName, 'DELETE', '/users', ['Authorization' => 'Bearer 4242']];
+        yield [new Microservice($msName = 'product', 'https://localhost', '/api', 'jsonld'),  $msName, 'GET', '/products'];
+        yield [new Microservice($msName = 'user', 'https://domain', '/app', 'json'), $msName, 'DELETE', '/users'];
     }
 }

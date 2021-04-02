@@ -6,6 +6,9 @@ use Mtarld\ApiPlatformMsBundle\Event\RequestEvent;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * @author Smaïne Milianni <smaine.milianni@gmail.com>
+ */
 class RequestLoggerListener implements EventSubscriberInterface
 {
     private $logger;
@@ -17,11 +20,10 @@ class RequestLoggerListener implements EventSubscriberInterface
 
     public function onHttpRequest(RequestEvent $event): void
     {
-        $this->logger->debug('[GenericHttpClient] for Microservice "{microservice_name}" calling {method} {url}', [
+        $this->logger->debug('Microservice "{microservice_name}" calling {method} {url}', [
             'method' => $event->getMethod(),
             'microservice_name' => $event->getMicroservice()->getName(),
             'url' => $event->getUri(),
-            'options' => $event->getOptions(),
         ]);
     }
 
