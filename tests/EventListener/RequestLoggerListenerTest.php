@@ -6,10 +6,10 @@ use Mtarld\ApiPlatformMsBundle\Event\RequestEvent;
 use Mtarld\ApiPlatformMsBundle\EventListener\RequestLoggerListener;
 use Mtarld\ApiPlatformMsBundle\Microservice\Microservice;
 use Psr\Log\LoggerInterface;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class RequestLoggerListenerTest extends KernelTestCase
+class RequestLoggerListenerTest extends TestCase
 {
     /**
      * @dataProvider microserviceDataProvider
@@ -20,7 +20,7 @@ class RequestLoggerListenerTest extends KernelTestCase
         $logger = $this->createMock(LoggerInterface::class);
         $logger->expects(self::once())
             ->method('debug')
-            ->with('Microservice "{microservice_name}" calling {method} {url}', [
+            ->with('Microservice "{microservice_name}" calling "{method} {url}".', [
                 'method' => $method,
                 'microservice_name' => $microserviceName,
                 'url' => $uri,
