@@ -5,8 +5,8 @@ namespace Mtarld\ApiPlatformMsBundle\Tests\EventListener;
 use Mtarld\ApiPlatformMsBundle\Event\RequestEvent;
 use Mtarld\ApiPlatformMsBundle\EventListener\RequestLoggerListener;
 use Mtarld\ApiPlatformMsBundle\Microservice\Microservice;
-use Psr\Log\LoggerInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class RequestLoggerListenerTest extends TestCase
