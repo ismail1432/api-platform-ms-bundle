@@ -20,7 +20,7 @@ class RequestLoggerListenerTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
         $logger->expects(self::once())
             ->method('debug')
-            ->with('Microservice "{microservice_name}" calling "{method} {url}".', [
+            ->with('Calling "{microservice_name}" microservice: "{method} {url}".', [
                 'method' => $method,
                 'microservice_name' => $microserviceName,
                 'url' => $uri,

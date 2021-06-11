@@ -24,7 +24,7 @@ class RequestLoggerListener implements EventSubscriberInterface
 
     public function onHttpRequest(RequestEvent $event): void
     {
-        $this->logger->debug('Microservice "{microservice_name}" calling "{method} {url}".', [
+        $this->logger->debug('Calling "{microservice_name}" microservice: "{method} {url}".', [
             'method' => $event->getMethod(),
             'microservice_name' => $event->getMicroservice()->getName(),
             'url' => $event->getUri(),
